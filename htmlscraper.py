@@ -30,12 +30,12 @@ class HTMLScraper(HTMLParser):
             self.feed(r.text)
 
     def __set_default(self, listener):
-        if listener["key"] not in self.scraped:
-            self.scraped[listener["key"]] = listener["default"]
+        self.scraped[listener["key"]] = listener["default"]
 
     def __set_defaults(self, url):
         self.scraped["url"] = url
-        map(self.__set_default, self.listeners)
+        map(self.__set_default,
+            filter(lambda l: l["key"] not in self.scraped, self.listeners))
 
     def __path_check(self, pathToCheck):
         pathList = pathToCheck.split()
