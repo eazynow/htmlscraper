@@ -30,7 +30,10 @@ class HTMLScraper(HTMLParser):
             self.feed(r.text)
 
     def __set_default(self, listener):
-        self.scraped[listener["key"]] = listener["default"]
+        if "default" in listener:
+            self.scraped[listener["key"]] = listener["default"]
+        else:
+            self.scraped[listener["key"]] = None
 
     def __set_defaults(self, url):
         self.scraped["url"] = url
