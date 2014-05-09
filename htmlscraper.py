@@ -38,7 +38,8 @@ class HTMLScraper(HTMLParser):
         map(self.__set_default, self.listeners)
 
     def __path_check(self, pathToCheck):
-        return self.tagPath == pathToCheck.split()
+        pathList = pathToCheck.split()
+        return self.tagPath[len(pathList)*-1:] == pathList
 
     def __attr_check(self, listener, attribs):
         for attrib in attribs:
